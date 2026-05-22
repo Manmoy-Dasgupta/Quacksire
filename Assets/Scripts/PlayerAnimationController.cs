@@ -46,11 +46,7 @@ public class PlayerAnimationController : MonoBehaviour
         if (movementScript == null || animator == null)
             return;
 
-        // Get movement input from joystick
-        Vector2 moveInput = movementScript.MoveInput;
-        
-        // Calculate movement magnitude (0 to 1)
-        float moveMagnitude = moveInput.magnitude;
+        float moveMagnitude = movementScript.AnimationSpeed;
         
         // Smooth the speed value for better animation transitions.
         float safeDuration = Mathf.Max(0.01f, transitionDuration);

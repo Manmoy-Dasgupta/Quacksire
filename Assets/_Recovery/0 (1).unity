@@ -553,9 +553,6 @@ PrefabInstance:
       addedObject: {fileID: 1826391770}
     - targetCorrespondingSourceObject: {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1826391773}
-    - targetCorrespondingSourceObject: {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1826391774}
     - targetCorrespondingSourceObject: {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       insertIndex: -1
@@ -1087,25 +1084,6 @@ MonoBehaviour:
   destroyOnDeath: 0
   addCapsuleHitTrigger: 1
   hitCapsuleCenter: {x: 0, y: 1.06, z: 0}
---- !u!114 &1826391773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1826391763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e1f2a3b4c5d6e7f8091a2b3c4d5e6f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WorldHealthBar
-  healthSystem: {fileID: 1826391772}
-  localOffset: {x: 0, y: 2.15, z: 0}
-  barSize: {x: 180, y: 22}
-  worldScale: 0.006
-  playerFill: {r: 0.2, g: 0.85, b: 0.25, a: 1}
-  enemyFill: {r: 0.9, g: 0.22, b: 0.2, a: 1}
-  backgroundColor: {r: 0, g: 0, b: 0, a: 0.65}
 --- !u!114 &1826391774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1455,7 +1433,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2987654301}
   - component: {fileID: 2987654302}
-  - component: {fileID: 2987654303}
   m_Layer: 0
   m_Name: CombatSystems
   m_TagString: Untagged
@@ -1496,30 +1473,6 @@ MonoBehaviour:
   animatorController: {fileID: 9100000, guid: 4c7fe8e1a3919c549a79a706afefd1ce, type: 2}
   humanoidAvatar: {fileID: 9000000, guid: de13a7420582ded45a8d7d3f96889aca, type: 3}
   enemyMaxHealth: 120
---- !u!114 &2987654303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2987654300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4c7377733aa4c3aa1e1b2f09c0d7e18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ApocalypseWorldBootstrap
-  playerTag: Player
-  player: {fileID: 1826391767}
-  targetCanvas: {fileID: 1466265728}
-  targetTerrain: {fileID: 939870725}
-  townCenterOffset: {x: 34, y: 0, z: 18}
-  townFootprint: {x: 118, y: 86}
-  buildingsPerSide: 4
-  wreckedCarCount: 7
-  minimapSize: 186
-  minimapMargin: 18
-  minimapHeight: 68
-  minimapOrthographicSize: 32
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -553,9 +553,6 @@ PrefabInstance:
       addedObject: {fileID: 1826391770}
     - targetCorrespondingSourceObject: {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1826391773}
-    - targetCorrespondingSourceObject: {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1826391774}
     - targetCorrespondingSourceObject: {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       insertIndex: -1
@@ -825,6 +822,7 @@ GameObject:
   - component: {fileID: 1731766740}
   - component: {fileID: 1731766739}
   - component: {fileID: 1731766738}
+  - component: {fileID: 1731766742}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -938,6 +936,49 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1731766742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731766737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d44b0e2f7f4dc29d9c10a4ac81d901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GenshinThirdPersonCamera
+  target: {fileID: 1826391767}
+  targetTag: Player
+  targetOffset: {x: 0, y: 1.45, z: 0}
+  distance: 5.2
+  sprintDistanceBonus: 0.7
+  minDistance: 2.6
+  maxDistance: 7.4
+  yaw: 0
+  pitch: 17
+  minPitch: -8
+  maxPitch: 45
+  mouseSensitivityX: 145
+  mouseSensitivityY: 95
+  zoomSensitivity: 1.25
+  positionSmoothTime: 0.08
+  rotationLerpSpeed: 16
+  distanceLerpSpeed: 8
+  normalFov: 60
+  sprintFov: 66
+  fovLerpSpeed: 5
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  collisionRadius: 0.28
+  collisionPadding: 0.18
+  cameraJoystick: {fileID: 2987654304}
+  joystickSensitivityX: 118
+  joystickSensitivityY: 78
+  lockCursorOnStart: 0
+  rotateWithoutMouseButton: 1
+  disableCinemachineComponents: 1
 --- !u!1 &1826391763 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
@@ -982,15 +1023,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MobileJoystickPlayerMovement
   joystick: {fileID: 2070287436}
   joystickSearchRoot: {fileID: 0}
+  hideJoystickVisuals: 1
+  useInvisibleLeftTouchZone: 1
+  leftTouchScreenPercent: 0.4
+  invisibleJoystickRadiusPixels: 135
+  invisibleJoystickDeadZone: 0.08
   playerTransform: {fileID: 1826391767}
   characterController: {fileID: 1826391764}
   playerRigidbody: {fileID: 0}
   cameraTransform: {fileID: 1731766741}
-  moveSpeed: 4
+  moveSpeed: 3.5
+  sprintSpeed: 5.4
   gravity: -20
   rotateTowardsMoveDirection: 1
   rotationSpeedDegrees: 540
-  cameraRelativeMovement: 0
+  cameraRelativeMovement: 1
+  sprintKey: 304
+  sprintInputThreshold: 0.85
 --- !u!4 &1826391767 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
@@ -1084,25 +1133,6 @@ MonoBehaviour:
   destroyOnDeath: 0
   addCapsuleHitTrigger: 1
   hitCapsuleCenter: {x: 0, y: 1.06, z: 0}
---- !u!114 &1826391773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1826391763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e1f2a3b4c5d6e7f8091a2b3c4d5e6f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WorldHealthBar
-  healthSystem: {fileID: 1826391772}
-  localOffset: {x: 0, y: 2.15, z: 0}
-  barSize: {x: 180, y: 22}
-  worldScale: 0.006
-  playerFill: {r: 0.2, g: 0.85, b: 0.25, a: 1}
-  enemyFill: {r: 0.9, g: 0.22, b: 0.2, a: 1}
-  backgroundColor: {r: 0, g: 0, b: 0, a: 0.65}
 --- !u!114 &1826391774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1450,6 +1480,8 @@ GameObject:
   - component: {fileID: 2987654301}
   - component: {fileID: 2987654302}
   - component: {fileID: 2987654303}
+  - component: {fileID: 2987654304}
+  - component: {fileID: 2987654305}
   m_Layer: 0
   m_Name: CombatSystems
   m_TagString: Untagged
@@ -1499,21 +1531,70 @@ MonoBehaviour:
   m_GameObject: {fileID: 2987654300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4c7377733aa4c3aa1e1b2f09c0d7e18, type: 3}
+  m_Script: {fileID: 11500000, guid: c9bd9d2d2a794390a961e4337c21a350, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ApocalypseWorldBootstrap
-  playerTag: Player
+  m_EditorClassIdentifier: Assembly-CSharp::GenshinHudController
+  canvas: {fileID: 1466265728}
+  mainCamera: {fileID: 1731766740}
   player: {fileID: 1826391767}
-  targetCanvas: {fileID: 1466265728}
-  targetTerrain: {fileID: 939870725}
-  townCenterOffset: {x: 34, y: 0, z: 18}
-  townFootprint: {x: 118, y: 86}
-  buildingsPerSide: 4
-  wreckedCarCount: 7
-  minimapSize: 186
-  minimapMargin: 18
-  minimapHeight: 68
-  minimapOrthographicSize: 32
+  playerHealth: {fileID: 1826391772}
+  playerMovement: {fileID: 1826391765}
+  playerTag: Player
+  hpStartColor: {r: 0.32, g: 0.95, b: 0.83, a: 1}
+  hpEndColor: {r: 0.16, g: 0.7, b: 0.95, a: 1}
+  hpTrailColor: {r: 1, g: 0.84, b: 0.34, a: 1}
+  panelColor: {r: 0.04, g: 0.055, b: 0.065, a: 0.58}
+  hpLerpSpeed: 9
+  damageTrailSpeed: 1.8
+  showStamina: 1
+  maxStamina: 100
+  sprintDrainPerSecond: 24
+  staminaRecoverPerSecond: 18
+  minimapSize: 154
+  minimapWorldRadius: 42
+  minimapCameraHeight: 72
+  minimapCullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  minimapBorderColor: {r: 0.92, g: 0.78, b: 0.48, a: 0.95}
+  enemyMarkerColor: {r: 1, g: 0.26, b: 0.2, a: 1}
+  objectiveMarkerColor: {r: 0.28, g: 0.95, b: 0.84, a: 1}
+--- !u!114 &2987654304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2987654300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8e5c724c07846c58bd6506e80711a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MobileCameraJoystick
+  canvas: {fileID: 1466265728}
+  rightTouchStartPercent: 0.4
+  lookRadiusPixels: 120
+  deadZone: 0.08
+  hideExistingLookGraphics: 1
+--- !u!114 &2987654305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2987654300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b5c7d9e1f2a4b6c8d0e2f4a6b8c0d2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameWindowTitleBar
+  canvas: {fileID: 1466265728}
+  barHeight: 36
+  buttonWidth: 46
+  barColor: {r: 0.86, g: 0.12, b: 0.12, a: 1}
+  iconColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverColor: {r: 1, g: 1, b: 1, a: 0.12}
+  closeHoverColor: {r: 0.9, g: 0.15, b: 0.15, a: 1}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
