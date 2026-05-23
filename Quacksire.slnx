@@ -1,6 +1,7 @@
 ﻿<Solution>
   <Project Path="Unity.AI.Sound.csproj" />
   <Project Path="Unity.AI.Toolkit.Asset.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Unity.AI.Pbr.csproj" />
   <Project Path="Unity.AI.Assistant.UI.Editor.csproj" />
   <Project Path="Unity.Multiplayer.Center.Editor.csproj" />
@@ -12,9 +13,8 @@
   <Project Path="Unity.AI.ModelSelector.csproj" />
   <Project Path="Unity.AI.Toolkit.Utility.csproj" />
   <Project Path="Unity.AI.MCP.Editor.csproj" />
-  <Project Path="Unity.AI.Assistant.Editor.csproj" />
   <Project Path="Unity.AI.Generators.Redux.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="Unity.AI.Assistant.Editor.csproj" />
   <Project Path="Unity.AI.Toolkit.Accounts.csproj" />
   <Project Path="Unity.AI.Generators.UI.csproj" />
   <Project Path="Unity.AI.Image.csproj" />
