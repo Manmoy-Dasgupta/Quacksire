@@ -479,6 +479,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Variable Joystick
       objectReference: {fileID: 0}
+    - target: {fileID: 3881087803549984439, guid: ec536a7718376554185e4a856d5ae230, type: 3}
+      propertyPath: m_Script
+      value: 
+      objectReference: {fileID: 11500000, guid: a1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6, type: 3}
     - target: {fileID: 3881087803815115470, guid: ec536a7718376554185e4a856d5ae230, type: 3}
       propertyPath: m_Color.a
       value: 0
@@ -534,10 +538,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3881087803549984437, guid: ec536a7718376554185e4a856d5ae230, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2070287439}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec536a7718376554185e4a856d5ae230, type: 3}
 --- !u!1 &1731766737
 GameObject:
@@ -708,11 +709,6 @@ MonoBehaviour:
   lockCursorOnStart: 0
   rotateWithoutMouseButton: 1
   disableCinemachineComponents: 1
---- !u!1 &1798533831 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3881087803549984437, guid: ec536a7718376554185e4a856d5ae230, type: 3}
-  m_PrefabInstance: {fileID: 1679045418}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1826391765 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6191476882601308888, guid: 1230f06eee880d443a15191dbca09b7c, type: 3}
@@ -859,43 +855,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3881087803549984439, guid: ec536a7718376554185e4a856d5ae230, type: 3}
   m_PrefabInstance: {fileID: 1679045418}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1798533831}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42844a4fccbd54746b90cade4ff70f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2070287439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1798533831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcc44f2a5955b684cb6b45583fcadd11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MobileJoystickPlayerMovement
-  joystick: {fileID: 0}
-  joystickSearchRoot: {fileID: 0}
-  hideJoystickVisuals: 1
-  useInvisibleLeftTouchZone: 1
-  leftTouchScreenPercent: 0.4
-  invisibleJoystickRadiusPixels: 135
-  invisibleJoystickDeadZone: 0.08
-  playerTransform: {fileID: 2070287435}
-  characterController: {fileID: 0}
-  playerRigidbody: {fileID: 0}
-  cameraTransform: {fileID: 0}
-  moveSpeed: 3.5
-  sprintSpeed: 5.4
-  gravity: -20
-  rotateTowardsMoveDirection: 1
-  rotationSpeedDegrees: 540
-  cameraRelativeMovement: 1
-  sprintKey: 304
-  sprintInputThreshold: 0.85
 --- !u!1 &2987654300
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,6 +874,7 @@ GameObject:
   - component: {fileID: 2987654303}
   - component: {fileID: 2987654304}
   - component: {fileID: 2987654305}
+  - component: {fileID: 2987654306}
   m_Layer: 0
   m_Name: CombatSystems
   m_TagString: Untagged
@@ -967,10 +933,26 @@ MonoBehaviour:
   playerHealth: {fileID: 1826391772}
   playerMovement: {fileID: 1826391765}
   playerTag: Player
-  hpStartColor: {r: 0.32, g: 0.95, b: 0.83, a: 1}
-  hpEndColor: {r: 0.16, g: 0.7, b: 0.95, a: 1}
-  hpTrailColor: {r: 1, g: 0.84, b: 0.34, a: 1}
-  panelColor: {r: 0.04, g: 0.055, b: 0.065, a: 0.58}
+  hpStartColor:
+    r: 0.32
+    g: 0.95
+    b: 0.83
+    a: 1
+  hpEndColor:
+    r: 0.16
+    g: 0.7
+    b: 0.95
+    a: 1
+  hpTrailColor:
+    r: 1
+    g: 0.84
+    b: 0.34
+    a: 1
+  panelColor:
+    r: 0.04
+    g: 0.055
+    b: 0.065
+    a: 0.58
   characterIconSprite: {fileID: 0}
   hpLerpSpeed: 9
   damageTrailSpeed: 1.8
@@ -982,11 +964,38 @@ MonoBehaviour:
   minimapWorldRadius: 42
   minimapCameraHeight: 72
   minimapCullingMask:
-    serializedVersion: 2
     m_Bits: 4294967295
-  minimapBorderColor: {r: 0.92, g: 0.78, b: 0.48, a: 0.95}
-  enemyMarkerColor: {r: 1, g: 0.26, b: 0.2, a: 1}
-  objectiveMarkerColor: {r: 0.28, g: 0.95, b: 0.84, a: 1}
+  minimapBorderColor:
+    r: 0.92
+    g: 0.78
+    b: 0.48
+    a: 0.95
+  enemyMarkerColor:
+    r: 1
+    g: 0.26
+    b: 0.2
+    a: 1
+  objectiveMarkerColor:
+    r: 0.28
+    g: 0.95
+    b: 0.84
+    a: 1
+  hudRoot: {fileID: 0}
+  hpFill: {fileID: 0}
+  hpTrail: {fileID: 0}
+  hpText: {fileID: 0}
+  staminaFill: {fileID: 0}
+  minimapCamera: {fileID: 0}
+  minimapTexture: {fileID: 0}
+  minimapRoot: {fileID: 0}
+  markerRoot: {fileID: 0}
+  playerArrow: {fileID: 0}
+  hudGroup: {fileID: 0}
+  displayedHpFraction: 1
+  trailHpFraction: 1
+  stamina: 0
+  markerRefreshTimer: 0
+  minimapExpanded: 0
 --- !u!114 &2987654304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1000,7 +1009,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MobileCameraJoystick
   canvas: {fileID: 1466265728}
-  rightTouchStartPercent: 0.4
+  movementZoneScreenPercent: 0.4
   lookRadiusPixels: 120
   deadZone: 0.1
   hideExistingLookGraphics: 1
@@ -1019,10 +1028,41 @@ MonoBehaviour:
   canvas: {fileID: 1466265728}
   barHeight: 36
   buttonWidth: 46
-  barColor: {r: 0.86, g: 0.12, b: 0.12, a: 1}
-  iconColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverColor: {r: 1, g: 1, b: 1, a: 0.12}
-  closeHoverColor: {r: 0.9, g: 0.15, b: 0.15, a: 1}
+  barColor:
+    r: 0.86
+    g: 0.12
+    b: 0.12
+    a: 1
+  iconColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
+  hoverColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 0.12
+  closeHoverColor:
+    r: 0.9
+    g: 0.15
+    b: 0.15
+    a: 1
+--- !u!114 &2987654306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2987654300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MobileInputUILayout
+  canvas: {fileID: 0}
+  movementJoystick: {fileID: 0}
+  movementZoneScreenPercent: 0.4
 --- !u!1001 &3354601576703495821
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1079,6 +1119,10 @@ PrefabInstance:
       propertyPath: aimCamera
       value: 
       objectReference: {fileID: 1731766740}
+    - target: {fileID: 5443230924870250999, guid: 1230f06eee880d443a15191dbca09b7c, type: 3}
+      propertyPath: destroyOnDeath
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6191476882601308888, guid: 1230f06eee880d443a15191dbca09b7c, type: 3}
       propertyPath: joystick
       value: 
@@ -1087,7 +1131,13 @@ PrefabInstance:
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 1731766741}
-    m_RemovedComponents: []
+    - target: {fileID: 6191476882601308888, guid: 1230f06eee880d443a15191dbca09b7c, type: 3}
+      propertyPath: movementJoystick
+      value: 
+      objectReference: {fileID: 2070287436}
+    m_RemovedComponents:
+    - {fileID: 434625458054879629, guid: 1230f06eee880d443a15191dbca09b7c, type: 3}
+    - {fileID: 4587531548194297913, guid: 1230f06eee880d443a15191dbca09b7c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

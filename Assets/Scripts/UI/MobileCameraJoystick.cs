@@ -1,10 +1,8 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 /// <summary>
-/// Invisible right-side look zone for Android camera control.
-/// Left 40% of the screen is reserved for movement; this script only reads the right 60%.
+/// Camera look input from the right side of the screen only (separate from movement joystick).
 /// </summary>
 [DefaultExecutionOrder(-45)]
 public class MobileCameraJoystick : MonoBehaviour
@@ -13,30 +11,31 @@ public class MobileCameraJoystick : MonoBehaviour
     [SerializeField] private Canvas canvas;
 
     [Header("Touch Zone")]
-    [SerializeField, Range(0.4f, 0.8f)] private float rightTouchStartPercent = 0.4f;
+    [SerializeField, Range(0.2f, 0.6f)] private float movementZoneScreenPercent = MobileTouchZones.DefaultMovementZonePercent;
     [SerializeField] private float lookRadiusPixels = 120f;
     [SerializeField, Range(0.1f, 1f)] private float deadZone = 0.08f;
     [SerializeField] private bool hideExistingLookGraphics = true;
 
-    private int lookTouchId = int.MinValue;
-    private Vector2 lastLookPosition;
+    int lookTouchId = int.MinValue;
+    Vector2 lastLookPosition;
 
     public Vector2 LookInput { get; private set; }
     public bool HasInput => LookInput.sqrMagnitude > deadZone * deadZone;
 
-    private void Start()
+    void Start()
     {
         ResolveCanvas();
+        SyncZoneFromLayout();
         if (hideExistingLookGraphics)
             HideGeneratedLookGraphics();
     }
 
-    private void Update()
+    void Update()
     {
-        ReadRightSideTouch();
+        ReadCameraZoneTouch();
     }
 
-    private void ResolveCanvas()
+    void ResolveCanvas()
     {
         if (canvas != null)
             return;
@@ -52,7 +51,14 @@ public class MobileCameraJoystick : MonoBehaviour
         }
     }
 
-    private void ReadRightSideTouch()
+    void SyncZoneFromLayout()
+    {
+        MobileInputUILayout layout = FindFirstObjectByType<MobileInputUILayout>();
+        if (layout != null)
+            movementZoneScreenPercent = layout.MovementZoneScreenPercent;
+    }
+
+    void ReadCameraZoneTouch()
     {
         LookInput = Vector2.zero;
 
@@ -62,15 +68,15 @@ public class MobileCameraJoystick : MonoBehaviour
             return;
         }
 
-        float rightBoundary = Screen.width * rightTouchStartPercent;
-
         for (int i = 0; i < Input.touchCount; i++)
         {
             Touch touch = Input.GetTouch(i);
 
             if (lookTouchId == int.MinValue)
             {
-                if (touch.phase == TouchPhase.Began && touch.position.x >= rightBoundary && !IsTouchOverUi(touch.fingerId))
+                if (touch.phase == TouchPhase.Began
+                    && MobileTouchZones.IsCameraZone(touch.position, movementZoneScreenPercent)
+                    && !IsTouchOverUi(touch.fingerId))
                 {
                     lookTouchId = touch.fingerId;
                     lastLookPosition = touch.position;
@@ -81,6 +87,12 @@ public class MobileCameraJoystick : MonoBehaviour
                 continue;
 
             if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+            {
+                lookTouchId = int.MinValue;
+                return;
+            }
+
+            if (!MobileTouchZones.IsCameraZone(touch.position, movementZoneScreenPercent))
             {
                 lookTouchId = int.MinValue;
                 return;
@@ -98,12 +110,12 @@ public class MobileCameraJoystick : MonoBehaviour
         lookTouchId = int.MinValue;
     }
 
-    private static bool IsTouchOverUi(int fingerId)
+    static bool IsTouchOverUi(int fingerId)
     {
         return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(fingerId);
     }
 
-    private void HideGeneratedLookGraphics()
+    void HideGeneratedLookGraphics()
     {
         if (canvas == null)
             return;

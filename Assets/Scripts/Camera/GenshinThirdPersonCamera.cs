@@ -105,20 +105,22 @@ public class GenshinThirdPersonCamera : MonoBehaviour
         if (cameraJoystick == null || !cameraJoystick.isActiveAndEnabled)
             cameraJoystick = FindFirstObjectByType<MobileCameraJoystick>();
 
-        bool joystickHasInput = cameraJoystick != null && cameraJoystick.HasInput;
-        if (joystickHasInput)
+        bool usingTouch = Input.touchCount > 0;
+
+        if (usingTouch && cameraJoystick != null)
         {
             Vector2 look = cameraJoystick.LookInput;
             yaw += look.x * joystickSensitivityX * Time.deltaTime;
             pitch -= look.y * joystickSensitivityY * Time.deltaTime;
         }
-
-        bool canRotate = rotateWithoutMouseButton || Input.GetMouseButton(1) || Cursor.lockState == CursorLockMode.Locked;
-
-        if (canRotate)
+        else
         {
-            yaw += Input.GetAxis("Mouse X") * mouseSensitivityX * Time.deltaTime;
-            pitch -= Input.GetAxis("Mouse Y") * mouseSensitivityY * Time.deltaTime;
+            bool canRotate = rotateWithoutMouseButton || Input.GetMouseButton(1) || Cursor.lockState == CursorLockMode.Locked;
+            if (canRotate)
+            {
+                yaw += Input.GetAxis("Mouse X") * mouseSensitivityX * Time.deltaTime;
+                pitch -= Input.GetAxis("Mouse Y") * mouseSensitivityY * Time.deltaTime;
+            }
         }
 
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
