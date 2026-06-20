@@ -1,52 +1,40 @@
 using UnityEngine;
 using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 /// <summary>
-/// Player movement only — reads the left-side movement joystick (and keyboard on PC).
-/// Camera rotation is handled separately by <see cref="MobileCameraJoystick"/> / <see cref="GenshinThirdPersonCamera"/>.
+/// Player movement from the left joystick (or keyboard). Camera look is handled elsewhere.
 /// </summary>
 public class MobileJoystickPlayerMovement : MonoBehaviour
 {
-    [Header("Joystick Input (movement only)")]
-    [Tooltip("Left-zone joystick used for walking / sprinting.")]
+    [Header("Joystick")]
     [FormerlySerializedAs("joystick")]
-    [SerializeField] private Joystick movementJoystick;
-    [Tooltip("If Movement Joystick is empty, searches this RectTransform (e.g. MovementZone).")]
+    [SerializeField] Joystick movementJoystick;
     [FormerlySerializedAs("joystickSearchRoot")]
-    [SerializeField] private RectTransform movementJoystickSearchRoot;
-    [SerializeField] private bool hideJoystickVisuals = true;
+    [SerializeField] RectTransform movementJoystickSearchRoot;
 
     [Header("Player & Camera")]
-    [SerializeField] private Transform playerTransform;
-    [SerializeField] private CharacterController characterController;
-    [SerializeField] private Rigidbody playerRigidbody;
-    [Tooltip("Used for camera-relative movement direction.")]
-    [SerializeField] private Transform cameraTransform;
+    [SerializeField] Transform playerTransform;
+    [SerializeField] CharacterController characterController;
+    [SerializeField] Rigidbody playerRigidbody;
+    [SerializeField] Transform cameraTransform;
 
     [Header("Movement")]
-    [SerializeField] private float moveSpeed = 3.5f;
-    [SerializeField] private float sprintSpeed = 5.4f;
-    [SerializeField] private float gravity = -20f;
-    [SerializeField] private bool rotateTowardsMoveDirection = true;
-    [SerializeField] private float rotationSpeedDegrees = 540f;
-    [SerializeField] private bool cameraRelativeMovement = true;
-    [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
-    [SerializeField, Range(0.1f, 1f)] private float sprintInputThreshold = 0.85f;
+    [SerializeField] float moveSpeed = 3.5f;
+    [SerializeField] float sprintSpeed = 5.4f;
+    [SerializeField] float gravity = -20f;
+    [SerializeField] bool rotateTowardsMoveDirection = true;
+    [SerializeField] float rotationSpeedDegrees = 540f;
+    [SerializeField] bool cameraRelativeMovement = true;
+    [SerializeField] KeyCode sprintKey = KeyCode.LeftShift;
+    [SerializeField, Range(0.1f, 1f)] float sprintInputThreshold = 0.85f;
 
-    private float verticalVelocity;
-    private bool loggedMissingJoystick;
+    float verticalVelocity;
 
     public Vector2 MoveInput { get; private set; }
     public bool IsSprinting { get; private set; }
     public bool IsMoving => MoveInput.sqrMagnitude > 0.0001f;
     public float CurrentMoveSpeed => IsSprinting ? sprintSpeed : moveSpeed;
     public float AnimationSpeed => IsMoving ? Mathf.Clamp01(MoveInput.magnitude) * (IsSprinting ? 1f : 0.72f) : 0f;
-
-    void Reset()
-    {
-        playerTransform = transform;
-    }
 
     void Awake()
     {
@@ -60,14 +48,14 @@ public class MobileJoystickPlayerMovement : MonoBehaviour
             playerRigidbody = null;
     }
 
-    void Start()
-    {
-        ResolveMovementJoystick();
-    }
+    void Start() => ResolveMovementJoystick();
 
     void ResolveMovementJoystick()
     {
-        if (movementJoystick == null && movementJoystickSearchRoot != null)
+        if (movementJoystick != null)
+            return;
+
+        if (movementJoystickSearchRoot != null)
             movementJoystick = movementJoystickSearchRoot.GetComponentInChildren<Joystick>(true);
 
         if (movementJoystick == null)
@@ -79,17 +67,6 @@ public class MobileJoystickPlayerMovement : MonoBehaviour
 
         if (movementJoystick == null)
             movementJoystick = FindFirstObjectByType<PlayerMovementJoystick>();
-
-        if (movementJoystick != null && hideJoystickVisuals)
-            HideJoystickGraphics();
-
-        if (movementJoystick == null && !loggedMissingJoystick)
-        {
-            loggedMissingJoystick = true;
-            Debug.LogWarning(
-                "[MobileJoystickPlayerMovement] No movement joystick found. Keyboard input still works for PC testing.",
-                this);
-        }
     }
 
     void Update()
@@ -175,19 +152,6 @@ public class MobileJoystickPlayerMovement : MonoBehaviour
             dir.Normalize();
 
         return dir;
-    }
-
-    void HideJoystickGraphics()
-    {
-        if (movementJoystick == null)
-            return;
-
-        foreach (Graphic graphic in movementJoystick.GetComponentsInChildren<Graphic>(true))
-        {
-            Color color = graphic.color;
-            color.a = 0f;
-            graphic.color = color;
-        }
     }
 
     void OnValidate()
