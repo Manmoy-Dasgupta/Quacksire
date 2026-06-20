@@ -34,11 +34,6 @@ public class PlayerAnimationController : MonoBehaviour
             // Try to find in the scene if not in parent
             movementScript = FindFirstObjectByType<MobileJoystickPlayerMovement>();
         }
-        
-        if (movementScript == null)
-        {
-            Debug.LogWarning("[PlayerAnimationController] No MobileJoystickPlayerMovement found. Please add the movement script to your player.", this);
-        }
     }
 
     private void Update()

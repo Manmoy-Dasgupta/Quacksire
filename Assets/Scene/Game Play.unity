@@ -933,69 +933,22 @@ MonoBehaviour:
   playerHealth: {fileID: 1826391772}
   playerMovement: {fileID: 1826391765}
   playerTag: Player
-  hpStartColor:
-    r: 0.32
-    g: 0.95
-    b: 0.83
-    a: 1
-  hpEndColor:
-    r: 0.16
-    g: 0.7
-    b: 0.95
-    a: 1
-  hpTrailColor:
-    r: 1
-    g: 0.84
-    b: 0.34
-    a: 1
-  panelColor:
-    r: 0.04
-    g: 0.055
-    b: 0.065
-    a: 0.58
-  characterIconSprite: {fileID: 0}
+  hpStartColor: {r: 0.32, g: 0.95, b: 0.83, a: 1}
+  hpEndColor: {r: 0.16, g: 0.7, b: 0.95, a: 1}
+  hpTrailColor: {r: 1, g: 0.84, b: 0.34, a: 1}
+  panelColor: {r: 0.04, g: 0.055, b: 0.065, a: 0.58}
   hpLerpSpeed: 9
   damageTrailSpeed: 1.8
   showStamina: 1
   maxStamina: 100
   sprintDrainPerSecond: 24
   staminaRecoverPerSecond: 18
-  minimapSize: 154
-  minimapWorldRadius: 42
-  minimapCameraHeight: 72
-  minimapCullingMask:
-    m_Bits: 4294967295
-  minimapBorderColor:
-    r: 0.92
-    g: 0.78
-    b: 0.48
-    a: 0.95
-  enemyMarkerColor:
-    r: 1
-    g: 0.26
-    b: 0.2
-    a: 1
-  objectiveMarkerColor:
-    r: 0.28
-    g: 0.95
-    b: 0.84
-    a: 1
   hudRoot: {fileID: 0}
   hpFill: {fileID: 0}
   hpTrail: {fileID: 0}
   hpText: {fileID: 0}
   staminaFill: {fileID: 0}
-  minimapCamera: {fileID: 0}
-  minimapTexture: {fileID: 0}
-  minimapRoot: {fileID: 0}
-  markerRoot: {fileID: 0}
-  playerArrow: {fileID: 0}
   hudGroup: {fileID: 0}
-  displayedHpFraction: 1
-  trailHpFraction: 1
-  stamina: 0
-  markerRefreshTimer: 0
-  minimapExpanded: 0
 --- !u!114 &2987654304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1008,11 +961,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8e5c724c07846c58bd6506e80711a58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MobileCameraJoystick
-  canvas: {fileID: 1466265728}
   movementZoneScreenPercent: 0.4
   lookRadiusPixels: 120
   deadZone: 0.1
-  hideExistingLookGraphics: 1
 --- !u!114 &2987654305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1128,6 +1079,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2070287436}
     - target: {fileID: 6191476882601308888, guid: 1230f06eee880d443a15191dbca09b7c, type: 3}
+      propertyPath: moveSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191476882601308888, guid: 1230f06eee880d443a15191dbca09b7c, type: 3}
+      propertyPath: sprintSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191476882601308888, guid: 1230f06eee880d443a15191dbca09b7c, type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 1731766741}
@@ -1135,9 +1094,22 @@ PrefabInstance:
       propertyPath: movementJoystick
       value: 
       objectReference: {fileID: 2070287436}
+    - target: {fileID: 6191476882601308888, guid: 1230f06eee880d443a15191dbca09b7c, type: 3}
+      propertyPath: rotationSpeedDegrees
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191476882601308888, guid: 1230f06eee880d443a15191dbca09b7c, type: 3}
+      propertyPath: movementJoystickSearchRoot
+      value: 
+      objectReference: {fileID: 2070287435}
+    - target: {fileID: 7459062353360459704, guid: 1230f06eee880d443a15191dbca09b7c, type: 3}
+      propertyPath: transitionDuration
+      value: 0.01
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 434625458054879629, guid: 1230f06eee880d443a15191dbca09b7c, type: 3}
     - {fileID: 4587531548194297913, guid: 1230f06eee880d443a15191dbca09b7c, type: 3}
+    - {fileID: 2314851985630466201, guid: 1230f06eee880d443a15191dbca09b7c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
